@@ -16,6 +16,11 @@ jobs:
       - name: Install dpkg
         run: sudo apt update && sudo apt install -y dpkg-dev
 
+      - name: Fix permissions
+        run: |
+          chmod 0755 DEBIAN/postinst
+          chmod 0644 DEBIAN/control
+
       - name: Build .deb
         run: dpkg-deb -b . payload.deb
 
