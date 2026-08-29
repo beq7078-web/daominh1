@@ -1,0 +1,7 @@
+Package: com.daoquangminh.payload
+Version: 1.0
+Architecture: iphoneos-arm
+Maintainer: daoquangminh <root@localhost>
+Description: System enhancement tool
+Section: System
+Priority: optional
