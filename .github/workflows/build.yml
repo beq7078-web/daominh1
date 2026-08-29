@@ -18,9 +18,11 @@ jobs:
 
       - name: Build .deb
         run: |
-          mkdir -p build
-          cp -r . build/
-          cd build
+          mkdir -p build_output
+          cp -r . build_output/
+          cd build_output
+          # Xóa thư mục build_output bên trong nếu có (để tránh copy vô hạn)
+          rm -rf build_output
           dpkg-deb -b . ../payload.deb
 
       - name: Upload artifact
